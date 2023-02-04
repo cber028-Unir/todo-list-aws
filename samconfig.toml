@@ -32,15 +32,3 @@ region = "us-east-1"
 capabilities = "CAPABILITY_IAM"
 parameter_overrides = "Stage=\"production\""
 image_repositories = []
-
-[Staging]
-[Staging.deploy]
-[Staging.deploy.parameters]
-stack_name = "todo-list-aws-staging"
-s3_bucket = "cber028-unir"
-s3_prefix = "todo-list-aws-staging"
-region = "us-east-1"
-confirm_changeset = true
-capabilities = "CAPABILITY_IAM"
-parameter_overrides = "Stage=\"Staging\""
-image_repositories = []
