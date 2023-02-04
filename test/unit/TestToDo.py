@@ -57,6 +57,15 @@ class TestDatabaseFunctions(unittest.TestCase):
         #self.assertIn('todoTable', self.table_local.name)
         print ('End: test_table_exists')
         
+    def test_table_exists_error(self):
+        print ('---------------------')
+        print ('Start: test_table_exists')
+        print('Table name:' + self.table.name)
+        tableName = os.environ['DYNAMODB_TABLE'];
+        # Table mock
+        self.assertRaises(Exception, tableName("", self.dynamodb))
+        self.assertRaises(Exception, tableName("", self.dynamodb))
+        print ('End: test_table_exists_error')
 
     def test_put_todo(self):
         print ('---------------------')
