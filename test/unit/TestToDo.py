@@ -84,7 +84,7 @@ class TestDatabaseFunctions(unittest.TestCase):
         # Table mock
         URL = "http://localhost:8000"
         os.environ['ENDPOINT_OVERRIDE'] = URL
-        os.environ['DYNAMODB_TABLE'] = "test_table"
+        os.environ['DYNAMODB_TABLE'] = "todotable"
         
         dynamodb = boto3.resource("dynamodb", endpoint_url=URL)
         table = get_table(dynamodb)
