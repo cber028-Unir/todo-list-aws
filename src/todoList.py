@@ -77,21 +77,21 @@ def update_item(key, text, checked, dynamodb=None):
     # update the todo in the database
     try:
         result = table.update_item(
-            Key = {
+            Key={
                 'id': key
             },
-            ExpressionAttributeNames = {
+            ExpressionAttributeNames={
               '#todo_text': 'text',
             },
-            ExpressionAttributeValues = {
+            ExpressionAttributeValues={
               ':text': text,
               ':checked': checked,
               ':updatedAt': timestamp,
             },
-            UpdateExpression = 'SET #todo_text = :text, '
+            UpdateExpression='SET #todo_text = :text, '
                              'checked = :checked, '
                              'updatedAt = :updatedAt',
-            ReturnValues = 'ALL_NEW',
+            ReturnValues='ALL_NEW',
         )
 
     except ClientError as e:
@@ -105,7 +105,7 @@ def delete_item(key, dynamodb=None):
     # delete the todo from the database
     try:
         table.delete_item(
-            Key = {
+            Key={
                 'id': key
             }
         )
@@ -121,20 +121,20 @@ def create_todo_table(dynamodb):
     tableName = os.environ['DYNAMODB_TABLE']
     print('Creating Table with name:' + tableName)
     table = dynamodb.create_table(
-        TableName = tableName,
-        KeySchema = [
+        TableName=tableName,
+        KeySchema=[
             {
                 'AttributeName': 'id',
                 'KeyType': 'HASH'
             }
         ],
-        AttributeDefinitions = [
+        AttributeDefinitions=[
             {
                 'AttributeName': 'id',
                 'AttributeType': 'S'
             }
         ],
-        ProvisionedThroughput = {
+        ProvisionedThroughput={
             'ReadCapacityUnits': 1,
             'WriteCapacityUnits': 1
         }
