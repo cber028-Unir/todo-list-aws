@@ -119,6 +119,20 @@ class TestDatabaseFunctions(unittest.TestCase):
         self.assertTrue(result[0]['text'] == self.text)
         print ('End: test_list_todo')
 
+    def test_list__order_todo(self):
+        print('---------------------')
+        print('Start: test_list_order_todo')
+        from src.todoList import put_item
+        from src.todoList import get_items_order
+
+        # Testing file functions
+        # Table mock
+        put_item(self.text, self.dynamodb)
+        result = get_items_order(self.dynamodb)
+        print('Response GetItems' + str(result))
+        self.assertTrue(len(result) == 1)
+        self.assertTrue(result[0]['text'] == self.text)
+        print('End: test_list_order_todo')
 
     def test_update_todo(self):
         print ('---------------------')
