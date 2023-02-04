@@ -28,12 +28,12 @@ class TestDatabaseFunctions(unittest.TestCase):
         self.is_local = 'true'
         self.uuid = "123e4567-e89b-12d3-a456-426614174000"
         self.text = "Aprender DevOps y Cloud en la UNIR"
-
+        
         from src.todoList import create_todo_table
         self.table = create_todo_table(self.dynamodb)
         #self.table_local = create_todo_table()
         print ('End: setUp')
-
+        
     def tearDown(self):
         print ('---------------------')
         print ('Start: tearDown')
@@ -43,13 +43,12 @@ class TestDatabaseFunctions(unittest.TestCase):
         #self.table_local.delete()
         self.dynamodb = None
         print ('End: tearDown')
-
+        
     def test_table_exists(self):
         print ('---------------------')
         print ('Start: test_table_exists')
         #self.assertTrue(self.table)  # check if we got a result
         #self.assertTrue(self.table_local)  # check if we got a result
-
         print('Table name:' + self.table.name)
         tableName = os.environ['DYNAMODB_TABLE'];
         # check if the table name is 'ToDo'
@@ -57,16 +56,17 @@ class TestDatabaseFunctions(unittest.TestCase):
         #self.assertIn('todoTable', self.table_local.name)
         print ('End: test_table_exists')
         
-    def test_table_exists_error(self):
+    def test_get_table(self):
         print ('---------------------')
-        print ('Start: test_table_exists')
-        print('Table name:' + self.table.name)
+        print ('Start: test_put_todo')
+        # Testing file functions
+        from src.todoList import get_table
+        #Table local
         tableName = os.environ['DYNAMODB_TABLE'];
-        # Table mock
-        self.assertRaises(Exception, tableName("", self.dynamodb))
-        self.assertRaises(Exception, tableName("", self.dynamodb))
-        print ('End: test_table_exists_error')
-
+        response = get_table(self.dynamodb)
+        self.assertEqual(response,tableName)
+        print ('End: test_put_todo')        
+        
     def test_put_todo(self):
         print ('---------------------')
         print ('Start: test_put_todo')
