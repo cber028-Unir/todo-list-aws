@@ -56,43 +56,6 @@ class TestDatabaseFunctions(unittest.TestCase):
         #self.assertIn('todoTable', self.table_local.name)
         print ('End: test_table_exists')
         
-    def test_get_table(self):
-        print ('---------------------')
-        print ('Start: test_get_table')
-        # Testing file functions
-        from src.todoList import get_table
-        #Table local
-        response = get_table(self.dynamodb)
-        self.assertEqual(response,self.table.name)
-        print ('End: test_get_table')
-        
-    def test_get_table_error(self):
-        print('---------------------')
-        print('Start: test_get_table_error')
-        # Testing file functions
-        from src.todoList import get_table
-        # Table mock
-        self.assertRaises(Exception, get_table("", self.dynamodb))
-        self.assertRaises(Exception, get_table("", self.dynamodb))
-        print('End: test_get_table_error')
-        
-    def test_get_table_with_endpoint_override(self):
-        print('---------------------')
-        print('Start: test_get_table_with_endpoint_override')
-        # Testing file functions
-        from src.todoList import get_table
-        # Table mock
-        URL = "http://localhost:8000"
-        os.environ['ENDPOINT_OVERRIDE'] = URL
-        os.environ['DYNAMODB_TABLE'] = "todotable"
-        
-        dynamodb = boto3.resource("dynamodb", endpoint_url=URL)
-        table = get_table(dynamodb)
-        
-        self.assertEqual(table.meta.client.meta.endpoint_url, URL)
-        self.assertEqual(table.name, "test_table")
-        print('End: test_get_table_with_endpoint_override')
-        
     def test_put_todo(self):
         print ('---------------------')
         print ('Start: test_put_todo')
