@@ -119,7 +119,7 @@ class TestDatabaseFunctions(unittest.TestCase):
         self.assertTrue(result[0]['text'] == self.text)
         print ('End: test_list_todo')
 
-    def test_list__order_todo(self):
+    def test_list_order_todo(self):
         print('---------------------')
         print('Start: test_list_order_todo')
         from src.todoList import put_item
