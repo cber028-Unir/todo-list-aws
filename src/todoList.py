@@ -146,5 +146,4 @@ def create_todo_table(dynamodb):
         raise AssertionError()
 
     return table
-    
-    
+# This is a new line that ends the file.
