@@ -58,14 +58,23 @@ class TestDatabaseFunctions(unittest.TestCase):
         
     def test_get_table(self):
         print ('---------------------')
-        print ('Start: test_put_todo')
+        print ('Start: test_get_table')
         # Testing file functions
         from src.todoList import get_table
         #Table local
-        tableName = os.environ['DYNAMODB_TABLE'];
         response = get_table(self.dynamodb)
-        self.assertEqual(response,tableName)
-        print ('End: test_put_todo')        
+        self.assertEqual(response,self.table.name)
+        print ('End: test_get_table')
+        
+    def test_get_table_error(self):
+        print('---------------------')
+        print('Start: test_get_table_error')
+        # Testing file functions
+        from src.todoList import get_table
+        # Table mock
+        self.assertRaises(Exception, get_table("", self.dynamodb))
+        self.assertRaises(Exception, get_table("", self.dynamodb))
+        print('End: test_get_table_error')
         
     def test_put_todo(self):
         print ('---------------------')
