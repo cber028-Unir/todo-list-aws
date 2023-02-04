@@ -76,6 +76,23 @@ class TestDatabaseFunctions(unittest.TestCase):
         self.assertRaises(Exception, get_table("", self.dynamodb))
         print('End: test_get_table_error')
         
+    def test_get_table_with_endpoint_override(self):
+        print('---------------------')
+        print('Start: test_get_table_with_endpoint_override')
+        # Testing file functions
+        from src.todoList import get_table
+        # Table mock
+        URL = "http://localhost:8000"
+        os.environ['ENDPOINT_OVERRIDE'] = URL
+        os.environ['DYNAMODB_TABLE'] = "test_table"
+        
+        dynamodb = boto3.resource("dynamodb", endpoint_url=URL)
+        table = get_table(dynamodb)
+        
+        self.assertEqual(table.meta.client.meta.endpoint_url, URL)
+        self.assertEqual(table.name, "test_table")
+        print('End: test_get_table_with_endpoint_override')
+        
     def test_put_todo(self):
         print ('---------------------')
         print ('Start: test_put_todo')
