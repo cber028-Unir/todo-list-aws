@@ -147,3 +147,4 @@ def create_todo_table(dynamodb):
 
     return table
     
+    
