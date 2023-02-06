@@ -56,6 +56,19 @@ class TestDatabaseFunctions(unittest.TestCase):
         #self.assertIn('todoTable', self.table_local.name)
         print ('End: test_table_exists')
         
+    def test_local_table_exists(self):
+        print ('---------------------')
+        print ('Start: test_local_table_exists')
+        URL = "http://localhost:8000"
+        os.environ['ENDPOINT_OVERRIDE'] = URL
+        
+        from scr.todoList import get_table
+        table = get_table(self.dynamodb)
+        
+        self.assertEqual(table.meta.client.meta.endpoint_url, URL)
+        self.assertEqual(table.name, os.environ['DYNAMODB_TABLE'])
+        print ('End: test_local_table_exists')
+        
     def test_put_todo(self):
         print ('---------------------')
         print ('Start: test_put_todo')
