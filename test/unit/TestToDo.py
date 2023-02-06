@@ -146,7 +146,7 @@ class TestDatabaseFunctions(unittest.TestCase):
         # Testing file functions
         from src.todoList import get_items
         # Table mock
-        self.assertRaises(Exception, get_items("", self.dynamodb))
+        #self.assertRaises(Exception, get_items("", self.dynamodb))
         self.assertRaises(Exception, get_items("", self.dynamodb))
         print('End: test_list_todo_error')
 
