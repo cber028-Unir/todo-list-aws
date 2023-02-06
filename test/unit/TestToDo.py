@@ -117,7 +117,7 @@ class TestDatabaseFunctions(unittest.TestCase):
         print('Start: test_list_todo')
         from src.todoList import put_item
         from src.todoList import get_items
-
+        
         # Testing file functions
         # Table mock
         put_item(self.text, self.dynamodb)
@@ -146,8 +146,7 @@ class TestDatabaseFunctions(unittest.TestCase):
         print('Result Update Item:' + str(result))
         self.assertEqual(result['text'], updated_text)
         print('End: test_update_todo')
-
-
+        
     def test_update_todo_error(self):
         print('---------------------')
         print('Start: atest_update_todo_error')
